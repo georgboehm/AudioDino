@@ -9,15 +9,15 @@ export const JUMPING_HEIGHT = CANVAS_HEIGHT - DINO_RENDER_DIM + 10 - 100;
 export const DINO_SPRITE_WALK_CYCLE = [3, 4, 5, 6, 7, 8].map(
   spritePositionToImagePosition
 );
-const dinoImage = new Image();
-dinoImage.src = "../sprites/dinoSprites.png";
+const dinoSprites = new Image();
+dinoSprites.src = "../sprites/dino.png";
 
 class Dino extends Entity {
   constructor(x, y, spriteWidth, spriteHeight, renderWidth, renderHeight) {
     super(
       x,
       y,
-      dinoImage,
+      dinoSprites,
       DINO_SPRITE_WALK_CYCLE[0],
       spriteWidth,
       spriteHeight,
