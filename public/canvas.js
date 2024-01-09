@@ -1,6 +1,17 @@
 import { collisionCheck } from "./helpers.js";
-import { Dino } from "./entities/dino.js";
-import { Cactus } from "./entities/cactus.js";
+import Dino, {
+  DINO_RENDER_DIM,
+  DINO_SPRITE_DIM,
+  RUNNING_HEIGHT,
+} from "./entities/dino.js";
+import Cactus, {
+  CACTUS_DEFAULT_X,
+  CACTUS_DEFAULT_Y,
+  CACTUS_RENDER_HEIGHT,
+  CACTUS_RENDER_WIDTH,
+  CACTUS_SPRITE_HEIGHT,
+  CACTUS_SPRITE_WIDTH,
+} from "./entities/cactus.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./constants.js";
 
 let gameState = "start"; // Possible values: 'start', 'playing', 'gameOver'
@@ -9,6 +20,27 @@ let gameState = "start"; // Possible values: 'start', 'playing', 'gameOver'
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
+
+// Initialize entities
+const dino = new Dino(
+  0,
+  RUNNING_HEIGHT,
+  DINO_SPRITE_DIM,
+  DINO_SPRITE_DIM,
+  DINO_RENDER_DIM,
+  DINO_RENDER_DIM
+);
+
+const cactus = new Cactus(
+  CACTUS_DEFAULT_X,
+  CACTUS_DEFAULT_Y,
+  CACTUS_SPRITE_WIDTH,
+  CACTUS_SPRITE_HEIGHT,
+  CACTUS_RENDER_WIDTH,
+  CACTUS_RENDER_HEIGHT
+);
+
+let entities = [dino, cactus];
 
 // Animation loop
 function animate() {
@@ -42,16 +74,14 @@ function animate() {
     }
 
     // Draw entities
-    Dino.draw(ctx);
-    Cactus.draw(ctx);
+    entities.forEach((entity) => entity.draw(ctx));
 
     // Update entities
     if (gameState == "playing") {
-      Dino.update();
-      Cactus.update();
+      entities.forEach((entity) => entity.update());
     }
 
-    if (collisionCheck(Dino, Cactus)) {
+    if (collisionCheck(dino, cactus)) {
       gameState = "gameOver";
     }
   }
@@ -65,21 +95,20 @@ window.onload = function () {
 // Dino jump event listener
 document.addEventListener("keydown", () => {
   if (gameState == "gameOver") {
-    Dino.reset();
-    Cactus.reset();
+    entities.forEach((entity) => entity.reset());
     gameState = "start";
     setTimeout(function () {
-      Dino.isJumping = false;
+      dino.isJumping = false;
     });
   }
   if (gameState == "start") {
     gameState = "playing";
     setTimeout(function () {
-      Dino.isJumping = false;
+      dino.isJumping = false;
     });
   }
-  Dino.isJumping = true;
+  dino.isJumping = true;
   setTimeout(function () {
-    Dino.isJumping = false;
+    dino.isJumping = false;
   }, 1000);
 });
