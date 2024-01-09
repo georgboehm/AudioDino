@@ -1,42 +1,42 @@
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from "../constants.js";
+import Entity from "./entity.js";
 
-const CACTUS_DEFAULT_X = CANVAS_WIDTH - 20;
-const CACTUS_DEFAULT_Y = CANVAS_HEIGHT - 30;
+export const CACTUS_DEFAULT_X = CANVAS_WIDTH - 20;
+export const CACTUS_DEFAULT_Y = CANVAS_HEIGHT - 30;
+export const CACTUS_SPRITE_WIDTH = 480;
+export const CACTUS_SPRITE_HEIGHT = 611;
+export const CACTUS_RENDER_WIDTH = 20;
+export const CACTUS_RENDER_HEIGHT = 30;
+
 const cactusImage = new Image();
 cactusImage.src = "../sprites/cactus.png";
 
-export const Cactus = {
-  x: CANVAS_WIDTH - 20,
-  y: CANVAS_HEIGHT - 30,
-  spriteWidth: 480,
-  spriteHeight: 611,
-  renderWidth: 20,
-  renderHeight: 30,
+class Cactus extends Entity {
+  constructor(x, y, spriteWidth, spriteHeight, renderWidth, renderHeight) {
+    super(
+      x,
+      y,
+      cactusImage,
+      cactusImage,
+      spriteWidth,
+      spriteHeight,
+      renderWidth,
+      renderHeight
+    );
+  }
 
   update() {
+    // move horizontally
     if (this.x <= 0) {
       this.x = CANVAS_WIDTH - 20;
     }
     this.x = this.x - 10;
-  },
-
-  draw(context) {
-    // Draw Cactus on the canvas
-    context.drawImage(
-      cactusImage,
-      0, // only one sprite to consider
-      0, // only one sprite to consider
-      Cactus.spriteWidth,
-      Cactus.spriteHeight,
-      Cactus.x,
-      Cactus.y,
-      Cactus.renderWidth,
-      Cactus.renderHeight
-    );
-  },
+  }
 
   reset() {
     this.x = CACTUS_DEFAULT_X;
     this.y = CACTUS_DEFAULT_Y;
-  },
-};
+  }
+}
+
+export default Cactus;
