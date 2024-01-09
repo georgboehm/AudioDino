@@ -1,5 +1,3 @@
-import { DINO_SPRITE_WALK_CYCLE } from "./entities/dino.js ";
-
 import { collisionCheck } from "./helpers.js";
 import { Dino } from "./entities/dino.js";
 import { Cactus } from "./entities/cactus.js";
@@ -12,16 +10,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-// Load spritesheets
-const dinoImage = new Image();
-dinoImage.src = "../sprites/dinoSprites.png";
-const cactusImage = new Image();
-cactusImage.src = "../sprites/cactus.png";
-
 // Animation loop
-let frameIndex = 0;
-let frame;
-
 function animate() {
   if (ctx) {
     if (gameState == "start") {
@@ -46,46 +35,18 @@ function animate() {
       );
       return; // Stop rendering
     }
-    if (frameIndex === DINO_SPRITE_WALK_CYCLE.length) {
-      // find next sprite
-      frameIndex = 0;
-    }
-    frame = DINO_SPRITE_WALK_CYCLE[frameIndex];
 
     // clear canvas on every frame when playing
     if (gameState == "playing") {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    // draw dino
-    ctx.drawImage(
-      dinoImage,
-      frame.x,
-      frame.y,
-      Dino.spriteWidth,
-      Dino.spriteHeight,
-      Dino.x,
-      Dino.y,
-      Dino.renderWidth,
-      Dino.renderHeight
-    );
+    // Draw entities
+    Dino.draw(ctx);
+    Cactus.draw(ctx);
 
-    // draw cactus
-    ctx.drawImage(
-      cactusImage,
-      0, // only one sprite to consider
-      0, // only one sprite to consider
-      Cactus.spriteWidth,
-      Cactus.spriteHeight,
-      Cactus.x,
-      Cactus.y,
-      Cactus.renderWidth,
-      Cactus.renderHeight
-    );
-
-    // Update entities and sprites
+    // Update entities
     if (gameState == "playing") {
-      frameIndex += 1;
       Dino.update();
       Cactus.update();
     }
@@ -97,7 +58,7 @@ function animate() {
 }
 
 // Main loop
-dinoImage.onload = function () {
+window.onload = function () {
   setInterval(animate, 100);
 };
 
