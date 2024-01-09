@@ -13,7 +13,7 @@ export const DINO_SPRITE_WALK_CYCLE = [3, 4, 5, 6, 7, 8].map(
 
 export const Dino = {
   x: 0,
-  y: RUNNING_HEIGHT, // TODO: Update in update instead, checking isJumping there
+  y: RUNNING_HEIGHT,
   spriteWidth: DINO_SPRITE_DIM,
   spriteHeight: DINO_SPRITE_DIM,
   renderWidth: DINO_RENDER_DIM,
@@ -32,5 +32,10 @@ export const Dino = {
   draw(ctx) {
     // Draw Dino on the canvas
     // ...
+  },
+
+  reset() {
+    this.y = RUNNING_HEIGHT;
+    this.isJumping = false;
   },
 };
