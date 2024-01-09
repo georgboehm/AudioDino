@@ -2,6 +2,9 @@ import { CANVAS_WIDTH, CANVAS_HEIGHT } from "../constants.js";
 
 const CACTUS_DEFAULT_X = CANVAS_WIDTH - 20;
 const CACTUS_DEFAULT_Y = CANVAS_HEIGHT - 30;
+const cactusImage = new Image();
+cactusImage.src = "../sprites/cactus.png";
+
 export const Cactus = {
   x: CANVAS_WIDTH - 20,
   y: CANVAS_HEIGHT - 30,
@@ -17,9 +20,19 @@ export const Cactus = {
     this.x = this.x - 10;
   },
 
-  draw(ctx) {
+  draw(context) {
     // Draw Cactus on the canvas
-    // ...
+    context.drawImage(
+      cactusImage,
+      0, // only one sprite to consider
+      0, // only one sprite to consider
+      Cactus.spriteWidth,
+      Cactus.spriteHeight,
+      Cactus.x,
+      Cactus.y,
+      Cactus.renderWidth,
+      Cactus.renderHeight
+    );
   },
 
   reset() {
