@@ -30,7 +30,7 @@ class Cactus extends Entity {
     if (this.x <= 0) {
       this.x = CANVAS_WIDTH - 20;
     }
-    this.x = this.x - 10;
+    this.x = this.x - 20;
   }
 
   reset() {

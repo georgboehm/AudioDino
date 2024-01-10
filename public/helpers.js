@@ -8,7 +8,7 @@ function spritePositionToImagePosition(col) {
   };
 }
 
-// Checks for collision between player and obstacles
+// Checks for collision between dino and cactus
 function collisionCheck(dino, cactus) {
   return (
     dino.x + DINO_RENDER_DIM - 20 > cactus.x &&
@@ -16,4 +16,21 @@ function collisionCheck(dino, cactus) {
   );
 }
 
-export { spritePositionToImagePosition, collisionCheck };
+// Checks if dino jumped over cactus successfully
+// and increases score accordingly
+function jumpOverCactusSuccessful(dino, cactus) {
+  return cactus.x <= dino.x;
+}
+
+// Function to toggle linkDiv visibility
+function toggleAudioDownloadLinkVisibility(showLink) {
+  const linkDiv = document.getElementById("linkDiv");
+  linkDiv.style.display = showLink ? "block" : "none";
+}
+
+export {
+  spritePositionToImagePosition,
+  collisionCheck,
+  jumpOverCactusSuccessful,
+  toggleAudioDownloadLinkVisibility,
+};
