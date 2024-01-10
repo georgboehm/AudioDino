@@ -47,10 +47,7 @@ class Game {
   handleInput() {
     // Key was pressed to make dino jump
     if (this.gameState == gameStates.PLAYING && !this.dino.isJumping) {
-      this.dino.isJumping = true;
-      setTimeout(() => {
-        this.dino.isJumping = false;
-      }, 2000);
+      this.dino.jump();
     }
     // Key was pressed to start new game
     if (
@@ -63,9 +60,6 @@ class Game {
       audioFile.play();
       this.setGameState(gameStates.PLAYING);
       this.reset();
-      setTimeout(() => {
-        this.dino.isJumping = false;
-      }, 100);
     }
   }
 
