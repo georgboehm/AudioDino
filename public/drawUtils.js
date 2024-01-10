@@ -1,5 +1,5 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./constants.js";
-import { NECESSARY_HIGHSCORE_FOR_LINK } from "./constants.js";
+import { AUDIO_UNLOCK_SCORE } from "./constants.js";
 import { toggleAudioDownloadLinkVisibility } from "./helpers.js";
 
 export function drawStartScreen(context) {
@@ -21,7 +21,7 @@ export function drawPlayingScreen(context, score) {
 export function drawGameOverScreen(context, score) {
   let displayText;
   let displayTextX;
-  if (score >= NECESSARY_HIGHSCORE_FOR_LINK) {
+  if (score >= AUDIO_UNLOCK_SCORE) {
     toggleAudioDownloadLinkVisibility(true);
     displayText = "Track unlocked!";
     displayTextX = CANVAS_WIDTH / 2 - 165;
