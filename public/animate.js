@@ -59,7 +59,7 @@ function animate() {
 
 // Main loop - generate new frame every 100 milliseconds
 window.onload = function () {
-  setInterval(animate, 100);
+  setInterval(animate, 75);
 };
 
 // Dino jump event listener
