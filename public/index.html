@@ -12,8 +12,18 @@
       <h1>Audio Dino on tour</h1>
       <canvas id="gameCanvas" width="600" height="600"></canvas>
       <div id="linkDiv">
-        <a href="https://www.example.com" target="_blank">Download new track</a>
+        <a href="audiofiles/sampleAudioFile.wav" target="_blank" download=""
+          >Download new track</a
+        >
       </div>
+      <!-- Audio Player -->
+      <div id="audioPlayer">
+        <audio preload="auto" loop>
+          <source src="audiofiles/sampleAudioFile.wav" type="audio/wav" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <!-- End of Audio Player -->
     </div>
     <script type="module" src="animate.js"></script>
   </body>
