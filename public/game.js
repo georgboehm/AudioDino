@@ -33,6 +33,9 @@ class Game {
         drawGameOverScreen(this.context, this.score);
         // Check for download link highscore
         this.entities.forEach((entity) => entity.reset());
+        // Stop audio from playing
+        const audioFile = document.querySelector("#audioPlayer audio");
+        audioFile.pause();
         break;
       default:
         drawStartScreen(this.context);
@@ -54,6 +57,10 @@ class Game {
       this.gameState == gameStates.START ||
       this.gameState == gameStates.GAME_OVER
     ) {
+      // Start audio file
+      const audioFile = document.querySelector("#audioPlayer audio");
+      audioFile.currentTime = 0;
+      audioFile.play();
       this.setGameState(gameStates.PLAYING);
       this.reset();
       setTimeout(() => {
