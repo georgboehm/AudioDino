@@ -1,4 +1,4 @@
-import { collisionCheck } from "./helpers.js";
+import { collisionCheck, jumpOverCactusSuccessful } from "./helpers.js";
 import Dino, {
   DINO_RENDER_DIM,
   DINO_SPRITE_DIM,
@@ -38,7 +38,7 @@ const cactus = new Cactus(
   CACTUS_RENDER_HEIGHT
 );
 
-const game = new Game(gameStates.START, ctx, dino, cactus);
+const game = new Game(gameStates.START, ctx, dino, cactus, 0);
 
 // Animation loop
 function animate() {
@@ -48,6 +48,11 @@ function animate() {
     // Check for collision between entities
     if (collisionCheck(dino, cactus)) {
       game.setGameState(gameStates.GAME_OVER);
+    }
+
+    // Check for score increase
+    if (jumpOverCactusSuccessful(dino, cactus)) {
+      game.increaseScore();
     }
   }
 }

@@ -1,10 +1,12 @@
 #content {
   text-align: center;
-  margin-top: 50px; /* Optional: Add some top margin for better appearance */
+  margin-top: 50px;
 }
 
 #gameCanvas {
-  border: 2px solid black; /* Adds a 2px black border around the canvas */
+  border: 2px solid black;
 }
 
-/* Optional: Add any additional styling as needed */
+#linkDiv {
+  display: none;
+}
