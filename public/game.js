@@ -46,7 +46,11 @@ class Game {
 
   handleInput() {
     // Key was pressed to make dino jump
-    if (this.gameState == gameStates.PLAYING && !this.dino.isJumping) {
+    if (
+      this.gameState == gameStates.PLAYING &&
+      !this.dino.isJumping &&
+      !this.dino.isFalling
+    ) {
       this.dino.jump();
     }
     // Key was pressed to start new game
