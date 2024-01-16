@@ -3,6 +3,7 @@ import { AUDIO_UNLOCK_SCORE } from "./constants.js";
 import { toggleAudioDownloadLinkVisibility } from "./helpers.js";
 
 export function drawStartScreen(context) {
+  context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   context.font = "24px Arial";
   context.fillText(
     "Press any button to start!",
