@@ -31,37 +31,40 @@ class Dino extends Entity {
     this.gravity = -20;
   }
 
-  update() {
-    // find next sprite
-    if (this.frameIndex === DINO_SPRITE_WALK_CYCLE.length) {
-      this.frameIndex = 0;
-    }
-    this.sprite = DINO_SPRITE_WALK_CYCLE[this.frameIndex];
-
-    // manage jumping state
-    if (this.isJumping) {
-      // reached max jump height
-      if (this.y < MAX_JUMPING_HEIGHT) {
-        this.isJumping = false;
-        this.isFalling = true;
-      } else {
-        // keep accelerating
-        this.velocity += this.gravity;
+  update(frame) {
+    // update sprite every 5 frames
+    if (frame % 5 === 0) {
+      // find next sprite
+      if (this.frameIndex === DINO_SPRITE_WALK_CYCLE.length) {
+        this.frameIndex = 0;
       }
-    }
-    if (this.isFalling) {
-      // dino needs to fall down again
-      if (this.velocity <= 20) {
-        this.velocity += -this.gravity;
-      }
-    }
+      this.sprite = DINO_SPRITE_WALK_CYCLE[this.frameIndex];
 
-    // close to ground again, start running state
-    if (this.y > RUNNING_HEIGHT - 50 && this.isFalling) {
-      this.run();
+      // manage jumping state
+      if (this.isJumping) {
+        // reached max jump height
+        if (this.y < MAX_JUMPING_HEIGHT) {
+          this.isJumping = false;
+          this.isFalling = true;
+        } else {
+          // keep accelerating
+          this.velocity += this.gravity;
+        }
+      }
+      if (this.isFalling) {
+        // dino needs to fall down again
+        if (this.velocity <= 20) {
+          this.velocity += -this.gravity;
+        }
+      }
+
+      // close to ground again, start running state
+      if (this.y > RUNNING_HEIGHT - 50 && this.isFalling) {
+        this.run();
+      }
+      this.y = this.y + this.velocity;
+      this.frameIndex++;
     }
-    this.y = this.y + this.velocity;
-    this.frameIndex++;
   }
 
   jump() {
