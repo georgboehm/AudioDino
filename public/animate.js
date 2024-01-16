@@ -1,4 +1,4 @@
-import { collisionCheck, jumpOverCactusSuccessful } from "./helpers.js";
+import { collisionCheck } from "./helpers.js";
 import Dino, {
   DINO_RENDER_DIM,
   DINO_SPRITE_DIM,
@@ -50,16 +50,17 @@ function animate() {
       game.setGameState(gameStates.GAME_OVER);
     }
 
-    // Check for score increase
-    if (jumpOverCactusSuccessful(dino, cactus)) {
+    // Cactus has reached left end of screen,
+    // meaning the dino has jumped over it successfully
+    if (cactus.despawn()) {
       game.increaseScore();
     }
   }
 }
 
-// Main loop - generate new frame every 100 milliseconds
+// Main loop - 60 fps
 window.onload = function () {
-  setInterval(animate, 75);
+  setInterval(animate, 16.67);
 };
 
 // Dino jump event listener

@@ -16,12 +16,6 @@ function collisionCheck(dino, cactus) {
   );
 }
 
-// Checks if dino jumped over cactus successfully
-// and increases score accordingly
-function jumpOverCactusSuccessful(dino, cactus) {
-  return cactus.x <= dino.x;
-}
-
 // Function to toggle linkDiv visibility
 function toggleAudioDownloadLinkVisibility(showLink) {
   const linkDiv = document.getElementById("linkDiv");
@@ -31,6 +25,5 @@ function toggleAudioDownloadLinkVisibility(showLink) {
 export {
   spritePositionToImagePosition,
   collisionCheck,
-  jumpOverCactusSuccessful,
   toggleAudioDownloadLinkVisibility,
 };

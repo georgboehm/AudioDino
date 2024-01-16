@@ -19,15 +19,17 @@ class Game {
     this.cactus = cactus;
     this.entities = [dino, cactus];
     this.score = score;
+    this.frame = 0;
   }
 
   // Draw canvas and entities and update states
   update() {
+    this.nextFrame();
     switch (this.gameState) {
       case gameStates.PLAYING:
         drawPlayingScreen(this.context, this.score);
         this.entities.forEach((entity) => entity.draw(this.context));
-        this.entities.forEach((entity) => entity.update());
+        this.entities.forEach((entity) => entity.update(this.frame));
         break;
       case gameStates.GAME_OVER:
         drawGameOverScreen(this.context, this.score);
@@ -57,9 +59,17 @@ class Game {
       // Start audio file
       const audioFile = document.querySelector("#audioPlayer audio");
       audioFile.currentTime = 0;
-      audioFile.play();
+      // audioFile.play(); // TODO
       this.setGameState(gameStates.PLAYING);
       this.reset();
+    }
+  }
+
+  nextFrame() {
+    if (this.frame >= 5) {
+      this.frame = 0;
+    } else {
+      this.frame++;
     }
   }
 

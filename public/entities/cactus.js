@@ -7,6 +7,7 @@ export const CACTUS_SPRITE_WIDTH = 480;
 export const CACTUS_SPRITE_HEIGHT = 611;
 export const CACTUS_RENDER_WIDTH = 20;
 export const CACTUS_RENDER_HEIGHT = 30;
+export const CACTUS_DESPAWN_X = 0;
 
 const cactusImage = new Image();
 cactusImage.src = "../sprites/cactus.png";
@@ -25,17 +26,24 @@ class Cactus extends Entity {
     );
   }
 
-  update() {
-    // move horizontally
-    if (this.x <= 0) {
-      this.x = CANVAS_WIDTH - 20;
+  update(frame) {
+    if (frame % 5 === 0) {
+      // move horizontally
+      this.x = this.x - 15;
     }
-    this.x = this.x - 20;
   }
 
   reset() {
     this.x = CACTUS_DEFAULT_X;
     this.y = CACTUS_DEFAULT_Y;
+  }
+
+  despawn() {
+    if (this.x <= CACTUS_DESPAWN_X) {
+      this.x = CANVAS_WIDTH - 20;
+      return true;
+    }
+    return false;
   }
 }
 
