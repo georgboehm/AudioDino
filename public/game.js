@@ -27,8 +27,7 @@ class Game {
     this.nextFrame();
     switch (this.gameState) {
       case gameStates.PLAYING:
-        drawPlayingScreen(this.context, this.score);
-        this.entities.forEach((entity) => entity.draw(this.context));
+        drawPlayingScreen(this.context, this.entities, this.score);
         this.entities.forEach((entity) => entity.update(this.frame));
         break;
       case gameStates.GAME_OVER:
@@ -40,8 +39,7 @@ class Game {
         audioFile.pause();
         break;
       default:
-        drawStartScreen(this.context);
-        this.entities.forEach((entity) => entity.draw(this.context));
+        drawStartScreen(this.context, this.entities, this.score);
         break;
     }
   }

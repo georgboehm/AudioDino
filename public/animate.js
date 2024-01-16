@@ -13,6 +13,7 @@ import Cactus, {
   CACTUS_SPRITE_WIDTH,
 } from "./entities/cactus.js";
 import Game, { gameStates } from "./game.js";
+import { GROUND_HEIGHT } from "./constants.js";
 
 // Initialize the canvas element and its context
 const canvas = document.getElementById("gameCanvas");
@@ -22,7 +23,7 @@ ctx.imageSmoothingEnabled = false;
 // Initialize entities
 const dino = new Dino(
   0,
-  RUNNING_HEIGHT,
+  RUNNING_HEIGHT - GROUND_HEIGHT,
   DINO_SPRITE_DIM,
   DINO_SPRITE_DIM,
   DINO_RENDER_DIM,
@@ -31,7 +32,7 @@ const dino = new Dino(
 
 const cactus = new Cactus(
   CACTUS_DEFAULT_X,
-  CACTUS_DEFAULT_Y,
+  CACTUS_DEFAULT_Y - GROUND_HEIGHT,
   CACTUS_SPRITE_WIDTH,
   CACTUS_SPRITE_HEIGHT,
   CACTUS_RENDER_WIDTH,

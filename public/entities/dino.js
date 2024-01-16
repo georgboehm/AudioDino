@@ -1,11 +1,12 @@
 import { spritePositionToImagePosition } from "../helpers.js";
-import { CANVAS_HEIGHT } from "../constants.js";
+import { CANVAS_HEIGHT, GROUND_HEIGHT } from "../constants.js";
 import Entity from "./entity.js";
 
 export const DINO_RENDER_DIM = 72;
 export const DINO_SPRITE_DIM = 24;
 export const RUNNING_HEIGHT = CANVAS_HEIGHT - DINO_RENDER_DIM + 10;
-const MAX_JUMPING_HEIGHT = CANVAS_HEIGHT - DINO_RENDER_DIM - 100 + 30;
+const MAX_JUMPING_HEIGHT =
+  CANVAS_HEIGHT - DINO_RENDER_DIM - GROUND_HEIGHT - 100 + 30;
 const DINO_SPRITE_WALK_CYCLE = [3, 4, 5, 6, 7, 8].map(
   spritePositionToImagePosition
 );
@@ -59,7 +60,7 @@ class Dino extends Entity {
       }
 
       // close to ground again, start running state
-      if (this.y > RUNNING_HEIGHT - 50 && this.isFalling) {
+      if (this.y > RUNNING_HEIGHT - 150 && this.isFalling) {
         this.run();
       }
       this.y = this.y + this.velocity;
@@ -73,14 +74,14 @@ class Dino extends Entity {
   }
 
   run() {
-    this.y = RUNNING_HEIGHT;
+    this.y = RUNNING_HEIGHT - GROUND_HEIGHT;
     this.isJumping = false;
     this.isFalling = false;
     this.velocity = 0;
   }
 
   reset() {
-    this.y = RUNNING_HEIGHT;
+    this.y = RUNNING_HEIGHT - GROUND_HEIGHT;
     this.isJumping = false;
     this.isFalling = false;
     this.velocity = 0;
