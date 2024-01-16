@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from "../constants.js";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, GROUND_HEIGHT } from "../constants.js";
 import Entity from "./entity.js";
 
 export const CACTUS_DEFAULT_X = CANVAS_WIDTH - 20;
@@ -35,7 +35,7 @@ class Cactus extends Entity {
 
   reset() {
     this.x = CACTUS_DEFAULT_X;
-    this.y = CACTUS_DEFAULT_Y;
+    this.y = CACTUS_DEFAULT_Y - GROUND_HEIGHT;
   }
 
   despawn() {

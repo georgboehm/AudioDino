@@ -2,21 +2,46 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./constants.js";
 import { AUDIO_UNLOCK_SCORE } from "./constants.js";
 import { toggleAudioDownloadLinkVisibility } from "./helpers.js";
 
-export function drawStartScreen(context) {
+const backgroundImage = new Image();
+backgroundImage.src = "./sprites/background.png";
+
+export function drawBackground(context) {
+  context.drawImage(
+    backgroundImage,
+    0,
+    0,
+    3072,
+    1536,
+    0,
+    0,
+    CANVAS_WIDTH,
+    CANVAS_HEIGHT
+  );
+}
+
+export function drawEntities(context, entities) {
+  entities.forEach((entity) => entity.draw(context));
+}
+
+export function drawStartScreen(context, entities) {
   context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  drawBackground(context);
   context.font = "24px Arial";
   context.fillText(
     "Press any button to start!",
     CANVAS_WIDTH / 2 - 130,
     CANVAS_HEIGHT / 2 - 100
   );
+  drawEntities(context, entities);
 }
 
-export function drawPlayingScreen(context, score) {
+export function drawPlayingScreen(context, entities, score) {
   context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  drawBackground(context);
   context.fillStyle = "black";
   context.font = "20px Arial";
   context.fillText(`Score: ${score}`, 25, 30);
+  drawEntities(context, entities);
 }
 
 export function drawGameOverScreen(context, score) {
