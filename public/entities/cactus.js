@@ -1,4 +1,10 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT, GROUND_HEIGHT } from "../constants.js";
+import {
+  CANVAS_WIDTH,
+  CANVAS_HEIGHT,
+  GROUND_HEIGHT,
+  FRAMES_PER_SECOND,
+} from "../constants.js";
+import { CactusDefault } from "../states/cactusStates.js";
 import Entity from "./entity.js";
 
 export const CACTUS_DEFAULT_X = CANVAS_WIDTH - 20;
@@ -24,13 +30,11 @@ class Cactus extends Entity {
       renderWidth,
       renderHeight
     );
-  }
-
-  update(frame) {
-    if (frame % 5 === 0) {
-      // move horizontally
-      this.x = this.x - 15;
-    }
+    this.states = [new CactusDefault(this)];
+    this.state = this.states[0];
+    this.fps = FRAMES_PER_SECOND;
+    this.frameTimer = 0;
+    this.frameInterval = 1000 / this.fps;
   }
 
   reset() {
