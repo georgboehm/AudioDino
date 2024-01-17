@@ -72,7 +72,7 @@ export class GameOver extends GameState {
     this.game = game;
   }
   draw() {
-    drawGameOverScreen(this.game.context, this.game.score);
+    drawGameOverScreen(this.game.context, this.game.entities, this.game.score);
     // Stop audio from playing
     const audioFile = document.querySelector("#audioPlayer audio");
     audioFile.pause();
