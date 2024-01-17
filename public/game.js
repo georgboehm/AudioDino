@@ -1,8 +1,3 @@
-import {
-  drawStartScreen,
-  drawPlayingScreen,
-  drawGameOverScreen,
-} from "./drawUtils.js";
 import { toggleAudioDownloadLinkVisibility } from "./helpers.js";
 import {
   GameOver,
@@ -31,14 +26,6 @@ class Game {
     document.addEventListener("keydown", () => {
       this.state.handleInput();
     });
-  }
-
-  nextFrame() {
-    if (this.frame >= 5) {
-      this.frame = 0;
-    } else {
-      this.frame++;
-    }
   }
 
   increaseScore() {
